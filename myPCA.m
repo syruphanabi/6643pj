@@ -1,14 +1,13 @@
-function [trainX, trainY, testX, testY] = myPCA(n,k)
-    var = load('all.csv');
-    c = randperm(39644);
+function [trainX, trainY, testX, testY] = myPCA(n,k,c)
+    var = load('Data/all.csv');
 
     train = var(c(1:n), :);
-    Y = train(:,end);
+    Y = train(:,end); %figure; hist(Y,40); title("distribution of Y");
     X = train(:,1:end-1);
 
     Y(Y<100) = 100;
     Y(Y>10e5) = 10e5;
-    Y = log(log(Y));
+    Y = log(log(Y)); %figure; hist(Y,40); title("distribution of log(log(Y))");
 
     %%%%%%%%%%%%%%%%%%%%%%%%%
     X = X';
@@ -30,7 +29,7 @@ function [trainX, trainY, testX, testY] = myPCA(n,k)
     Y2 = log(log(Y2));
 
     %%%%%%%%%%%%%%%%%%%%%%%%%
-    Xm2 = U(:,1:20)' * X2';
+    Xm2 = U(:,1:k)' * X2';
     Xm2 = Xm2';
     %%%%%%%%%%%%%%%%%%%%%%%%%
 
