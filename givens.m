@@ -1,10 +1,12 @@
 function [c,s] = givens(a,b)
-if b == 0
-    c = 1; s = 0;
-else 
+    format long
     if abs(b) > abs(a)
-        r = -a/b; s = 1/sqrt(1+r^2);c = s*r;
+        if b == 0
+            c = 1; s = 0; return;
+        end
+        r = -a/b; s = 1/sqrt(1+r*r);c = s*r;
     else
-        r = -b/a; c = 1/sqrt(1+r^2);s = c*r;
+        r = -b/a; c = 1/sqrt(1+r*r);s = c*r;
     end
+
 end
