@@ -1,7 +1,7 @@
-function [trainX, trainY, testX, testY] = myPrepare(n)
+function [trainX, trainY, testX, testY] = myPrepare(n,c)
 
-    var = load('afterlasso.csv');
-    c = randperm(39644);
+    var = load('Data/afterlasso.csv');
+%     c = randperm(39644);
     
     % train
     train = var(c(1:n), :);
