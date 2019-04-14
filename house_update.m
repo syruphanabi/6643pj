@@ -1,6 +1,7 @@
 function [Q, R] = house_update(Q_origin, R_origin, a)
 R = [R_origin;a];
 [m,n] = size(R_origin);
+[m,m] = size(Q_origin);
 Q = [Q_origin, zeros(m,1);zeros(1,m),1];
 for i = 1:n
     x = [R(i,i);R(m+1,i)];
