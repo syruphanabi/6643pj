@@ -1,5 +1,5 @@
-% clc;
-% clear;
+clc;
+clear;
 
 m = 3000;
 n =20;

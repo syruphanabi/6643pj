@@ -1,13 +1,23 @@
-% c = randperm(39644);
+clc;
+clear;
+
 load('Data/c.mat');
-[trainX, trainY, testX, testY] = myPCA(m,n,c);
+n = 3000; k = 20;
+
+[trainX, trainY, testX, testY] = myPCA(n,k,c);
 A = trainX;
 b = trainY;
 
 Aadd = testX;
 
 [Q_origin, R_origin] = mgsqr(A);
+[Qerr,Rerr] = errtest(A,Q_origin,R_origin,k);
 
-
-[Q,R] = givens_update(Q_origin, R_origin, a);
+p = 3;
+a = testX(1:p,:);
+tic;
+% [Q,R] = givens_update(Q_origin, R_origin, a);
+[Q,R] = house_update(Q_origin, R_origin, a);
+toc;
+[Qerrg,Rerrg] = errtest(A,Q,R,k);
 

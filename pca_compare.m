@@ -1,4 +1,6 @@
-% c = randperm(39644);
+clc;
+clear;
+
 load('Data/c.mat');
 
 
