@@ -9,7 +9,7 @@ function [Q,R] = houseqr(A)
         v(1) = v(1) + s*alpha;
         % Householder Matrix
         % P_small = eye(m-i+1)-2.*v*v'/(v'*v);
-        % for computation efficience reason, P_small is not used explictly.
+        % for computation efficiency reason, P_small is not used explictly.
         R(i:m,i:n) = R(i:m,i:n) - 2*v*(v'*R(i:m,i:n))/(v'*v);
         Q(:,i:m) = Q(:,i:m) - 2*(Q(:,i:m)*v)*v'/(v'*v);
         
