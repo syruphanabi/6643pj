@@ -1,5 +1,4 @@
 function [c,s] = givens(a,b)
-    format long
     if abs(b) > abs(a)
         if b == 0
             c = 1; s = 0; return;
