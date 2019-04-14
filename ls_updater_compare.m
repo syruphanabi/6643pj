@@ -10,14 +10,31 @@ b = trainY;
 
 Aadd = testX;
 
-[Q_origin, R_origin] = mgsqr(A);
+[Q_origin, R_origin] = givensqr(A);
 [Qerr,Rerr] = errtest(A,Q_origin,R_origin,k);
 
-p = 3;
-a = testX(1:p,:);
-tic;
-% [Q,R] = givens_update(Q_origin, R_origin, a);
-[Q,R] = house_update(Q_origin, R_origin, a);
-toc;
-[Qerrg,Rerrg] = errtest(A,Q,R,k);
+
+q = 1000;
+idx = 1:50:q;
+update = zeros(length(idx),1);
+complete = zeros(length(idx),1);
+
+p = 1;
+for i = 1:50:q
+    tic; 
+    [Q,R] = givensqr([A;testX(1:i,:)]);
+    complete(p) = toc;
+
+    tic; 
+    [Q,R] = givens_update(Q_origin, R_origin, testX(1:i,:));
+    update(p) = toc;
+    
+    p = p+1;
+end
+
+figure;
+plot(idx,update,idx,complete,'Linewidth',5);
+legend('update', 'complete');
+xlabel('num of new rows');
+ylabel('time');
 
